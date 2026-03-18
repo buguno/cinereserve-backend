@@ -8,6 +8,12 @@ class SeatInline(admin.TabularInline):
     extra = 10
 
 
+@admin.register(Seat)
+class SeatAdmin(admin.ModelAdmin):
+    list_display = ('id', 'room', 'row', 'number')
+    list_filter = ('room',)
+
+
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     inlines = [SeatInline]
@@ -15,8 +21,5 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Showtime)
 class ShowtimeAdmin(admin.ModelAdmin):
-    list_display = ('movie', 'room', 'start_time')
+    list_display = ('id', 'movie', 'room', 'start_time')
     list_filter = ('movie', 'room', 'start_time')
-
-
-admin.site.register(Seat)  # Caso queira editar assentos individualmente
