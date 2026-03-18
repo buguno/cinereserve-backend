@@ -1,6 +1,8 @@
 from rest_framework.serializers import (
     CharField,
+    IntegerField,
     ModelSerializer,
+    Serializer,
     ValidationError,
 )
 
@@ -36,3 +38,8 @@ class TicketSerializer(ModelSerializer):
             raise ValidationError('This seat has already been purchased.')
 
         return data
+
+
+class CheckoutSerializer(Serializer):
+    showtime_id = IntegerField()
+    seat_id = IntegerField()
