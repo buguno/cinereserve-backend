@@ -13,7 +13,6 @@ class UserSerializer(ModelSerializer):
             'username',
             'email',
             'password',
-            'full_name',
         ]
 
     def create(self, validated_data):
@@ -21,7 +20,6 @@ class UserSerializer(ModelSerializer):
             username=validated_data.get('username'),
             email=validated_data.get('email'),
             password=validated_data.get('password'),
-            full_name=validated_data.get('full_name'),
         )
 
         return user
