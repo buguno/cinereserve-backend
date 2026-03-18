@@ -134,6 +134,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REDIS_URL = os.getenv('REDIS_URL', 'redis://127.0.0.1:6379/1')
+REDIS_CACHE_URL = os.getenv('REDIS_CACHE_URL', 'redis://127.0.0.1:6379/2')
+SEAT_LOCK_TTL_SECONDS = int(os.getenv('SEAT_LOCK_TTL_SECONDS', '600'))
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_CACHE_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+        'KEY_PREFIX': 'cinereserve',
+        'TIMEOUT': 60,
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
