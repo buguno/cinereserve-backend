@@ -91,6 +91,7 @@ class ShowtimeSeatMapView(APIView):
 
 class ReserveSeatView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_scope = 'seat_reservation'
 
     def post(self, request, showtime_id: int):
         serializer = ReserveSeatSerializer(data=request.data)

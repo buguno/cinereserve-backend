@@ -30,6 +30,7 @@ class TicketListView(ListAPIView):
 
 class TicketCheckoutView(APIView):
     permission_classes = [IsAuthenticated]
+    throttle_scope = 'checkout'
 
     def post(self, request):
         serializer = CheckoutSerializer(data=request.data)
