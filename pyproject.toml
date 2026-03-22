@@ -15,7 +15,9 @@ dependencies = [
     "drf-yasg (>=1.21.15,<2.0.0)",
     "psycopg[binary] (>=3.3.3,<4.0.0)",
     "django-redis (>=6.0.0,<7.0.0)",
-    "redis (>=7.3.0,<8.0.0)"
+    "redis (>=7.3.0,<8.0.0)",
+    "celery (>=5.6.2,<6.0.0)",
+    "gunicorn (>=25.1.0,<26.0.0)"
 ]
 
 [tool.poetry.group.dev.dependencies]
@@ -24,6 +26,8 @@ pytest-cov = "^7.0.0"
 taskipy = "^1.14.1"
 ruff = "^0.15.6"
 typos = "^1.44.0"
+pytest-django = "^4.12.0"
+faker = "^40.11.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -44,6 +48,23 @@ quote-style = 'single'
 [tool.pytest.ini_options]
 pythonpath = "."
 addopts = '-p no:warnings'
+DJANGO_SETTINGS_MODULE = "core.settings"
+python_files = ["tests.py", "test_*.py", "*_test.py"]
+
+[tool.coverage.run]
+omit = [
+    "manage.py",
+    "conftest.py",
+    "*/settings.py",
+    "*/asgi.py",
+    "*/wsgi.py",
+    "*/migrations/*",
+    "*/tests.py",
+]
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = true
 
 [tool.taskipy.tasks]
 pre_lint = 'typos'
@@ -54,3 +75,6 @@ run = 'python manage.py runserver'
 migrations = 'python manage.py makemigrations'
 migrate = 'python manage.py migrate'
 superuser = 'python manage.py createsuperuser'
+test = "pytest -q"
+test_cov = "pytest --cov=. --cov-report=term-missing --cov-report=html"
+test_users = "pytest users/tests.py -q"
