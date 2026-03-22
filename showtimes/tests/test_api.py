@@ -2,7 +2,7 @@ import pytest
 from rest_framework import status
 
 from movies.models import Movie
-from showtimes.models import Showtime
+from showtimes.models import Room, Seat, Showtime
 from showtimes.services import acquire_seat_lock
 from tickets.models import Ticket
 
@@ -235,8 +235,6 @@ def test_reserve_seat_rejects_seat_from_another_room(
     showtime,
     faker,
 ):
-    from showtimes.models import Room, Seat
-
     other_room = Room.objects.create(
         name=faker.word(),
         capacity=10,

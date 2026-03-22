@@ -20,4 +20,8 @@ class Ticket(models.Model):
         unique_together = ('showtime', 'seat')
 
     def __str__(self):
-        return f'Ticket: {self.user.username} - {self.showtime.movie.title} ({self.seat})'
+        return (
+            f'Ticket: {self.user.username}'
+            f' - {self.showtime.movie.title}'
+            f' ({self.seat})'
+        )

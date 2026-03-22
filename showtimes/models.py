@@ -35,4 +35,5 @@ class Showtime(models.Model):
     start_time = models.DateTimeField()
 
     def __str__(self):
-        return f'{self.movie.title} | {self.room.name} @ {self.start_time.strftime("%d/%m %H:%M")}'
+        time = self.start_time.strftime('%d/%m %H:%M')
+        return f'{self.movie.title} | {self.room.name} @ {time}'

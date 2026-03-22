@@ -150,7 +150,7 @@ def test_checkout_rejects_past_showtime(api_client, user, movie, room, seat):
 
 
 @pytest.mark.django_db
-def test_checkout_successfully_creates_ticket_releases_lock_and_schedules_email(
+def test_checkout_creates_ticket_releases_lock_and_schedules_email(
     api_client,
     user,
     showtime,
