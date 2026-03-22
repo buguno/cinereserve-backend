@@ -47,9 +47,9 @@ quote-style = 'single'
 
 [tool.pytest.ini_options]
 pythonpath = "."
-addopts = '-p no:warnings'
+addopts = "-p no:warnings"
 DJANGO_SETTINGS_MODULE = "core.settings"
-python_files = ["tests.py", "test_*.py", "*_test.py"]
+python_files = ["test_*.py", "*_test.py"]
 
 [tool.coverage.run]
 omit = [
@@ -59,7 +59,7 @@ omit = [
     "*/asgi.py",
     "*/wsgi.py",
     "*/migrations/*",
-    "*/tests.py",
+    "*/tests/*",
 ]
 
 [tool.coverage.report]
@@ -77,7 +77,7 @@ migrate = 'python manage.py migrate'
 superuser = 'python manage.py createsuperuser'
 test = "pytest -q"
 test_cov = "pytest --cov=. --cov-report=term-missing --cov-report=html"
-test_movies = "pytest movies/tests.py -q"
-test_showtimes = "pytest showtimes/tests.py -q"
-test_tickets = "pytest tickets/tests.py -q"
-test_users = "pytest users/tests.py -q"
+test_movies = "pytest movies/tests -q"
+test_showtimes = "pytest showtimes/tests -q"
+test_tickets = "pytest tickets/tests -q"
+test_users = "pytest users/tests -q"
