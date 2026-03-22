@@ -1,9 +1,9 @@
 services:
-  web:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: cinereserve-web
+    container_name: cinereserve-backend
     env_file:
       - .env
     ports:
