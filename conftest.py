@@ -6,6 +6,7 @@ from django.core.cache import cache
 from django.utils import timezone
 from rest_framework.test import APIClient
 
+from core.redis import get_redis_client
 from movies.models import Movie
 from showtimes.models import Room, Seat, Showtime
 
@@ -84,3 +85,11 @@ def showtime(movie, room):
         room=room,
         start_time=timezone.now() + timedelta(days=1),
     )
+
+
+@pytest.fixture(autouse=True)
+def clear_cache_and_seat_locks():
+    cache.clear()
+    redis_client = get_redis_client()
+    for key in redis_client.scan_iter(match='seat_lock:*'):
+        redis_client.delete(key)
