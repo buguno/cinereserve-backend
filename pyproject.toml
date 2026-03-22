@@ -78,3 +78,5 @@ superuser = 'python manage.py createsuperuser'
 test = "pytest -q"
 test_cov = "pytest --cov=. --cov-report=term-missing --cov-report=html"
 test_users = "pytest users/tests.py -q"
+test_movies = "pytest movies/tests.py -q"
+test_showtimes = "pytest showtimes/tests.py -q"
