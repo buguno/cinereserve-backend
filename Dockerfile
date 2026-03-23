@@ -33,6 +33,8 @@ RUN chown -R appuser:appuser /app
 
 USER appuser
 
+RUN SECRET_KEY=dummy-build-key /app/.venv/bin/python manage.py collectstatic --noinput
+
 EXPOSE 8000
 
 CMD ["/app/.venv/bin/gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "60"]
