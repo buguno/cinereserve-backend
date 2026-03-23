@@ -125,7 +125,9 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = (
+        os.getenv('SECURE_SSL_REDIRECT', 'False').lower() == 'true'
+    )
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
