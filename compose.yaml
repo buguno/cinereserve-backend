@@ -3,9 +3,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: cinereserve-backend:local
     container_name: cinereserve-backend
     env_file:
       - .env
+    environment:
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      REDIS_CACHE_URL: redis://redis:6379/2
+      CELERY_BROKER_URL: redis://redis:6379/3
+      CELERY_RESULT_BACKEND: redis://redis:6379/4
     ports:
       - "8000:8000"
     depends_on:
@@ -15,9 +22,7 @@ services:
         condition: service_healthy
 
   worker:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: cinereserve-backend:local
     container_name: cinereserve-worker
     command:
       [
@@ -30,6 +35,12 @@ services:
       ]
     env_file:
       - .env
+    environment:
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      REDIS_CACHE_URL: redis://redis:6379/2
+      CELERY_BROKER_URL: redis://redis:6379/3
+      CELERY_RESULT_BACKEND: redis://redis:6379/4
     depends_on:
       db:
         condition: service_healthy
@@ -37,9 +48,7 @@ services:
         condition: service_healthy
 
   beat:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: cinereserve-backend:local
     container_name: cinereserve-beat
     command:
       [
@@ -52,6 +61,12 @@ services:
       ]
     env_file:
       - .env
+    environment:
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      REDIS_CACHE_URL: redis://redis:6379/2
+      CELERY_BROKER_URL: redis://redis:6379/3
+      CELERY_RESULT_BACKEND: redis://redis:6379/4
     depends_on:
       db:
         condition: service_healthy
